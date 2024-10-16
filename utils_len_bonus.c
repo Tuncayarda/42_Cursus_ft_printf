@@ -6,7 +6,7 @@
 /*   By: tuaydin <tuaydin@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:59:21 by tuaydin           #+#    #+#             */
-/*   Updated: 2024/10/15 22:00:35 by tuaydin          ###   ########.fr       */
+/*   Updated: 2024/10/16 17:49:58 by tuaydin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 
 int	ft_hexlen(unsigned long val)
 {
-	int count = 0;
+	int	count;
 
+	count = 0;
 	if (val == 0)
-		return 1;
+		return (1);
 	while (val > 0)
 	{
-		val /= 16; 
-		count++;    
+		val /= 16;
+		count++;
 	}
 	return (count);
 }

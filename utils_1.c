@@ -6,7 +6,7 @@
 /*   By: tuaydin <tuaydin@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 15:09:27 by tuaydin           #+#    #+#             */
-/*   Updated: 2024/10/15 17:52:00 by tuaydin          ###   ########.fr       */
+/*   Updated: 2024/10/16 21:06:01 by tuaydin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_putstr(char *s)
 	rtn = 0;
 	if (!s)
 		return (ft_putstr("(null)"));
-	while(*s)
+	while (*s)
 	{
 		rtn += ft_putchar(*s);
 		s++;

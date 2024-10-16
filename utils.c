@@ -6,7 +6,7 @@
 /*   By: tuaydin <tuaydin@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 18:36:56 by tuaydin           #+#    #+#             */
-/*   Updated: 2024/10/15 21:48:39 by tuaydin          ###   ########.fr       */
+/*   Updated: 2024/10/16 20:02:49 by tuaydin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_isdigit(int c)
 int	ft_digitlen(long val)
 {
 	int	count;
-	
+
 	count = 0;
 	if (val == 0)
 		return (1);
@@ -41,7 +41,7 @@ int	ft_digitlen(long val)
 
 int	ft_uatoi(char **sptr)
 {
-	size_t	(rtn);
+	size_t	rtn;
 
 	rtn = 0;
 	while (**sptr >= '0' && **sptr <= '9')
@@ -58,7 +58,10 @@ int	ft_strlen(char *s)
 	int	i;
 
 	i = 0;
+	if (!s)
+		return (6);
 	while (s[i])
 		i++;
 	return (i);
 }
+

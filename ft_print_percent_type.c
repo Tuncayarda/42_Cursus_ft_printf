@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_u_type.c                                  :+:      :+:    :+:   */
+/*   ft_print_percent_type.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tuaydin <tuaydin@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 17:36:27 by tuaydin           #+#    #+#             */
-/*   Updated: 2024/10/16 17:45:06 by tuaydin          ###   ########.fr       */
+/*   Created: 2024/10/16 19:16:00 by tuaydin           #+#    #+#             */
+/*   Updated: 2024/10/16 19:27:37 by tuaydin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_print_u_type(t_fdata p_data, unsigned long val)
+int	ft_print_percent_type(t_fdata p_data)
 {
 	if (p_data.f_flag == 0 && p_data.s_flag == 0)
-		return (ft_putdigit(val));
-	if ((p_data.f_flag == '-' || p_data.f_flag == 'w') && p_data.s_flag == 0)
-		return (ft_putdigit_minus(p_data, (long)val));
-	if ((p_data.f_flag == '0' || p_data.f_flag == '.') && p_data.s_flag == 0)
-		return (ft_putdigit_zero(p_data, val));
+		return (ft_putchar('%'));
+	if (p_data.f_flag == 'w' && p_data.s_flag == 0)
+		return (ft_putpercent_width(p_data));
+	if (p_data.f_flag == '-' && p_data.s_flag == 0)
+		return (ft_putpercent_minus(p_data));
 	return (0);
 }
