@@ -6,7 +6,7 @@
 /*   By: tuaydin <tuaydin@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:53:14 by tuaydin           #+#    #+#             */
-/*   Updated: 2024/10/17 11:39:52 by tuaydin          ###   ########.fr       */
+/*   Updated: 2024/10/17 13:24:02 by tuaydin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,12 @@
 int	ft_puthex_zero(t_fdata p_data, unsigned long val, int is_upper)
 {
 	int	count;
+	int	flag;
 
+	flag = 0;
 	count = 0;
+	if (p_data.ff_val != 0)
+		flag = 1;
 	if (val < 0)
 	{
 		val = -val;
@@ -28,7 +32,7 @@ int	ft_puthex_zero(t_fdata p_data, unsigned long val, int is_upper)
 		count += ft_putchar('0');
 		p_data.ff_val--;
 	}
-	if (p_data.ff_val != 0)
+	if (flag || val > 0)
 	{
 		if (is_upper)
 			count += ft_puthex(val, is_upper);
@@ -68,7 +72,8 @@ int	ft_putdigit_dot(t_fdata p_data, long val)
 		count += ft_putchar('0');
 		p_data.ff_val--;
 	}
-	if (p_data.ff_val != 0)
+	
+	if (p_data.ff_val != 0 || val > 0)
 		count += ft_putdigit(val);
 	return (count);
 }
