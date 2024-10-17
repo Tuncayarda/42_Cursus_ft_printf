@@ -6,7 +6,7 @@
 /*   By: tuaydin <tuaydin@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 19:47:50 by tuaydin           #+#    #+#             */
-/*   Updated: 2024/10/16 21:13:27 by tuaydin          ###   ########.fr       */
+/*   Updated: 2024/10/17 08:22:30 by tuaydin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,19 @@ int	ft_putnull(int val)
 	count = 0;
 	while (count < val)
 		count += ft_putchar(null[count]);
+	return (count);
+}
+
+int		ft_putdigit_width(t_fdata p_data, long val)
+{
+	int	count;
+
+	count = 0;
+	while (p_data.ff_val > ft_digitlen(val))
+	{
+		count += ft_putchar(' ');
+		p_data.ff_val--;	
+	}
+	count += ft_putdigit(val);
 	return (count);
 }

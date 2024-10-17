@@ -6,7 +6,7 @@
 /*   By: tuaydin <tuaydin@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 21:13:01 by tuaydin           #+#    #+#             */
-/*   Updated: 2024/10/16 17:48:34 by tuaydin          ###   ########.fr       */
+/*   Updated: 2024/10/17 11:39:40 by tuaydin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ int	ft_puthex_minus(t_fdata p_data, unsigned long val, int is_upper)
 
 	count = 0;
 	if (is_upper)
-		count += ft_puthex(val, "0123456789ABCDEF");
+		count += ft_puthex(val, is_upper);
 	else
-		count += ft_puthex(val, "0123456789abcdef");
+		count += ft_puthex(val, is_upper);
 	temp = count;
 	while (p_data.ff_val > temp)
 	{

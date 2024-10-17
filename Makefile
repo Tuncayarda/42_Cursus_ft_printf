@@ -6,7 +6,8 @@ MSRCS = ft_printf.c	\
 		ft_print_u_type.c ft_print_x_type.c \
 		utils.c utils_1.c ft_print_percent_type.c
 
-BSRCS = utils_len_bonus.c utils_bonus.c utils1_bonus.c utils2_bonus.c utils3_bonus.c utils4_bonus.c
+BSRCS = utils_len_bonus.c utils_bonus.c utils1_bonus.c utils2_bonus.c utils3_bonus.c utils4_bonus.c \
+		utils5_bonus.c utils6_bonus.c
 
 MOBJS = $(MSRCS:.c=.o)
 BOBJS = $(BSRCS:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: tuaydin <tuaydin@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 18:36:56 by tuaydin           #+#    #+#             */
-/*   Updated: 2024/10/16 20:02:49 by tuaydin          ###   ########.fr       */
+/*   Updated: 2024/10/17 09:40:22 by tuaydin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,3 +65,16 @@ int	ft_strlen(char *s)
 	return (i);
 }
 
+int	ft_uatoi1(char *sptr)
+{
+	size_t	rtn;
+
+	rtn = 0;
+	while (*sptr >= '0' && *sptr <= '9')
+	{
+		rtn *= 10;
+		rtn += *sptr - '0';
+		sptr++;
+	}
+	return (rtn);
+}

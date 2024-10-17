@@ -6,7 +6,7 @@
 /*   By: tuaydin <tuaydin@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 15:09:27 by tuaydin           #+#    #+#             */
-/*   Updated: 2024/10/16 21:06:01 by tuaydin          ###   ########.fr       */
+/*   Updated: 2024/10/17 11:38:55 by tuaydin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,20 @@ int	ft_putptr(unsigned long val)
 	return (count);
 }
 
-int	ft_puthex(unsigned long val, const char *base)
+int	ft_puthex(unsigned long val, int is_upper)
 {
 	int		count;
 	char	buffer[16];
 	int		i;
-
+	const char *base;
+	
 	count = 0;
 	if (!val)
 		return (ft_putstr("0"));
+	if(is_upper)
+		base = u_hex_base;
+	else
+		base = l_hex_base;
 	i = 0;
 	while (val > 0)
 	{
