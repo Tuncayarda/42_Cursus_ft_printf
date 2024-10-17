@@ -6,7 +6,7 @@
 /*   By: tuaydin <tuaydin@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 15:49:50 by tuaydin           #+#    #+#             */
-/*   Updated: 2024/10/17 19:06:08 by tuaydin          ###   ########.fr       */
+/*   Updated: 2024/10/17 20:53:13 by tuaydin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,21 +55,12 @@ static char	ft_check_after_dot(char *str)
 static char	ft_check_after_zero(char *str)
 {
 	int	i;
-	int	flag;
 
-	flag = 0;
 	i = 0;
 	while (!ft_isvalidtype(str[i]))
 	{
-		
-		if (str[i] >= '1' && str[i]<= '9')
-			flag = 1;
-		if (str[i] == '0' && !flag)
-			return ('0');
 		if (str[i] == '.')
 			return ('.');
-		if (str[i] == ' ')
-			return (' ');
 		i++;
 	}
 	return (0);
@@ -116,7 +107,19 @@ static char ft_check_after_space(char *str)
 	}
 	return (0);
 }
+static int	ft_check_after_width(char *str)
+{
+	int	i;
 
+	i = 0;
+	while (!ft_isvalidtype(str[i]))
+	{
+		if (str[i] == '.')
+			return ('.');
+		i++;
+	}
+	return (0);
+}
 static int	ft_define_flags(va_list *args, char **sptr)
 {
 	t_fdata pd;
@@ -128,7 +131,12 @@ static int	ft_define_flags(va_list *args, char **sptr)
 	{
 		pd.f_flag = 'w';
 		pd.ff_val = ft_uatoi(sptr);
-		pd.s_flag = 0;
+		pd.s_flag = ft_check_after_width(*sptr);
+		if (pd.s_flag == '.')
+		{
+			(*sptr)++;
+			pd.sf_val = ft_uatoi(sptr);
+		}
 		pd.v_type = ft_isvalidtype(**sptr);
 	}
 	else if (**sptr == '.')
@@ -158,6 +166,11 @@ static int	ft_define_flags(va_list *args, char **sptr)
 		pd.s_flag = ft_check_after_zero(*sptr);
 		pd.ff_val = ft_uatoi(sptr);
 		pd.sf_val = 0;
+		if (pd.s_flag == '.')
+		{
+			(*sptr)++;
+			pd.sf_val = ft_uatoi(sptr);
+		}
 		pd.v_type = ft_isvalidtype(**sptr);
 	}
 	else if (**sptr == ' ')
@@ -200,6 +213,15 @@ static int	ft_define_flags(va_list *args, char **sptr)
 	else if(**sptr == '#')
 	{
 		pd.f_flag = '#';
+		(*sptr)++;
+		pd.ff_val = ft_uatoi(sptr);
+		pd.s_flag = 0;
+		pd.sf_val = 0;
+		pd.v_type = ft_isvalidtype(**sptr);
+	}
+	else if(**sptr == '+')
+	{
+		pd.f_flag = '+';
 		(*sptr)++;
 		pd.ff_val = ft_uatoi(sptr);
 		pd.s_flag = 0;
