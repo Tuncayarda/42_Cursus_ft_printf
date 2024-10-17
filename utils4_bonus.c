@@ -6,7 +6,7 @@
 /*   By: tuaydin <tuaydin@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 19:47:50 by tuaydin           #+#    #+#             */
-/*   Updated: 2024/10/17 08:22:30 by tuaydin          ###   ########.fr       */
+/*   Updated: 2024/10/17 14:35:24 by tuaydin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,12 @@ int	ft_putstr_minus_dot(t_fdata p_data, char *str)
 int	ft_putnull(int val)
 {
 	int	count;
+	char *g_null;
 
+	g_null = "(null)";
 	count = 0;
-	while (count < val)
-		count += ft_putchar(null[count]);
+	while (count < val && count < 6)
+		count += ft_putchar(g_null[count]);
 	return (count);
 }
 

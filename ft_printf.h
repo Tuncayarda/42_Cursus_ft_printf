@@ -6,7 +6,7 @@
 /*   By: tuaydin <tuaydin@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 15:48:31 by tuaydin           #+#    #+#             */
-/*   Updated: 2024/10/17 12:02:15 by tuaydin          ###   ########.fr       */
+/*   Updated: 2024/10/17 18:55:29 by tuaydin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 # define FT_PRINTF_H
 
 # include <stdarg.h>
+# include <stdlib.h>
 # include <unistd.h>
 
-static const char null[7] = "(null)";
+
 static const char *u_hex_base = "0123456789ABCDEF";
 static const char *l_hex_base = "0123456789abcdef";
 
@@ -29,6 +30,7 @@ typedef struct flag_data
 	long		sf_val;
 }				t_fdata;
 
+char	*ft_strdup(char *s1);
 int		ft_printf(const char *str, ...);
 int		ft_uatoi(char **sptr);
 int		ft_uatoi1(char *sptr);
@@ -74,19 +76,16 @@ int		ft_putpercent_width(t_fdata p_data);
 int		ft_putdigit_width(t_fdata p_data, long val);
 int		ft_puthex_width(t_fdata p_data, long val, int is_upper);
 int		ft_putptr_width(t_fdata p_data, unsigned long val);
-
 int		ft_putchar_dot(t_fdata p_data, char c);
-
 int		ft_putstr_width_dot(t_fdata p_data, char *str);
 int		ft_putdigit_width_dot(t_fdata p_data, long val);
 int		ft_puthex_width_dot(t_fdata p_data, long val, int is_upper);
-
 int		ft_putstr_minus_dot(t_fdata p_data, char *str);
 int		ft_putdigit_minus_dot(t_fdata p_data, long val);
 int		ft_puthex_minus_dot(t_fdata p_data, long val, int is_upper);
-
 int		ft_puthex_zero_dot(t_fdata p_data, long val, int is_upper);
-
 int		ft_putdigit_dot_zero(t_fdata p_data, long val);
 int		ft_puthex_dot_zero(t_fdata p_data, long val, int is_upper);
+int		ft_putstr_space_width(t_fdata p_data, char *str);
+int		ft_putdigit_minus_zero(t_fdata p_data, long val);
 #endif

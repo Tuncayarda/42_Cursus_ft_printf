@@ -6,7 +6,7 @@
 /*   By: tuaydin <tuaydin@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 08:26:15 by tuaydin           #+#    #+#             */
-/*   Updated: 2024/10/17 13:59:21 by tuaydin          ###   ########.fr       */
+/*   Updated: 2024/10/17 14:15:30 by tuaydin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	ft_putdigit_minus_dot(t_fdata p_data, long val)
 		count += ft_putchar('0');
 		p_data.sf_val--;
 	}
-	if (p_data.sf_val != 0)
+	if (p_data.sf_val != 0 || val > 0)
 		count += ft_putdigit(val);
 	else
 		count += ft_putchar(' ');

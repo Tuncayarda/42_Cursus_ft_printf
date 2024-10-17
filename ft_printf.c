@@ -6,7 +6,7 @@
 /*   By: tuaydin <tuaydin@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 15:49:50 by tuaydin           #+#    #+#             */
-/*   Updated: 2024/10/17 09:49:00 by tuaydin          ###   ########.fr       */
+/*   Updated: 2024/10/17 19:06:08 by tuaydin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdio.h>
 static int	ft_do_print(va_list *args, t_fdata print_data)
 {
-	//printf("%c/ %ld/ %c/ %ld/ %c/", print_data.f_flag, print_data.ff_val, print_data.s_flag, print_data.sf_val, print_data.v_type);
+	//printf("\n%c/ %ld/ %c/ %ld/ %c/\n", print_data.f_flag, print_data.ff_val, print_data.s_flag, print_data.sf_val, print_data.v_type);
 	if (print_data.v_type == 'c')
 		return (ft_print_c_type(print_data, va_arg(*args, int)));
 	if (print_data.v_type == 's')
@@ -34,34 +34,186 @@ static int	ft_do_print(va_list *args, t_fdata print_data)
 	return (0);
 }
 
+static char	ft_check_after_dot(char *str)
+{
+	int	i;
+	int	flag;
+
+	flag = 0;
+	i = 0;
+	while (!ft_isvalidtype(str[i]))
+	{
+		if (str[i] >= '1' && str[i]<= '9')
+			flag = 1;
+		if (str[i] == '0' && !flag)
+			return ('0');
+		i++;
+	}
+	return (0);
+}
+
+static char	ft_check_after_zero(char *str)
+{
+	int	i;
+	int	flag;
+
+	flag = 0;
+	i = 0;
+	while (!ft_isvalidtype(str[i]))
+	{
+		
+		if (str[i] >= '1' && str[i]<= '9')
+			flag = 1;
+		if (str[i] == '0' && !flag)
+			return ('0');
+		if (str[i] == '.')
+			return ('.');
+		if (str[i] == ' ')
+			return (' ');
+		i++;
+	}
+	return (0);
+}
+
+static char	ft_check_after_minus(char *str)
+{
+	int	i;
+	int	flag;
+
+	flag = 0;
+	i = 0;
+	while (!ft_isvalidtype(str[i]))
+	{
+		if (str[i] >= '1' && str[i]<= '9')
+			flag = 1;
+		if (str[i] == '0' && !flag)
+			return ('0');
+		if (str[i] == '.')
+			return ('.');
+		i++;
+	}
+	return (0);
+}
+
+static char ft_check_after_space(char *str)
+{
+	int	i;
+	int	flag;
+
+	flag = 0;
+	i = 0;
+	while (!ft_isvalidtype(str[i]))
+	{
+		if (str[i] >= '1' && str[i]<= '9')
+			flag = 1;
+		if (str[i] == '0' && !flag)
+			return ('0');
+		if (str[i] == '.')
+			return ('.');
+		if (str[i] == '-')
+			return ('-');
+		i++;
+	}
+	return (0);
+}
+
 static int	ft_define_flags(va_list *args, char **sptr)
 {
-	t_fdata	print_data;
-
+	t_fdata pd;
+	
+	pd.f_flag = 0;
+	pd.s_flag = 0;
 	(*sptr)++;
 	if (**sptr >= '1' && **sptr <= '9')
 	{
-		print_data.f_flag = 'w';
-		print_data.ff_val = ft_uatoi(sptr);
-		print_data.s_flag = ft_isflag(**sptr);
-		if (ft_isflag(**sptr))
-			ft_passflag(sptr);
-		print_data.sf_val = ft_uatoi(sptr);
-		print_data.v_type = ft_isvalidtype(**sptr);
-		return (ft_do_print(args, print_data));
+		pd.f_flag = 'w';
+		pd.ff_val = ft_uatoi(sptr);
+		pd.s_flag = 0;
+		pd.v_type = ft_isvalidtype(**sptr);
 	}
-	print_data.f_flag = ft_isflag(**sptr);
-	if (ft_isflag(**sptr))
-		ft_passflag(sptr);
-	if (ft_uatoi1(*sptr) != 0)
-		print_data.ff_val = ft_uatoi(sptr);
-	else print_data.ff_val = 0;
-	print_data.s_flag = ft_isflag(**sptr);
-	if (ft_isflag(**sptr))
-		ft_passflag(sptr);
-	print_data.sf_val = ft_uatoi(sptr);
-	print_data.v_type = ft_isvalidtype(**sptr);
-	return (ft_do_print(args, print_data));
+	else if (**sptr == '.')
+	{
+		pd.f_flag = '.';
+		pd.s_flag = ft_check_after_dot(*sptr);
+		if (pd.s_flag == '0')
+		{
+			pd.ff_val = 0;
+			(*sptr)++;
+			pd.sf_val = ft_uatoi(sptr);
+			pd.v_type = ft_isvalidtype(**sptr);
+		}
+		else
+		{
+			(*sptr)++;
+			pd.ff_val = ft_uatoi(sptr);
+			pd.s_flag = 0;
+			pd.sf_val = 0;
+			pd.v_type = ft_isvalidtype(**sptr);
+		}
+	}
+	else if (**sptr == '0')
+	{
+		pd.f_flag = '0';
+		(*sptr)++;
+		pd.s_flag = ft_check_after_zero(*sptr);
+		pd.ff_val = ft_uatoi(sptr);
+		pd.sf_val = 0;
+		pd.v_type = ft_isvalidtype(**sptr);
+	}
+	else if (**sptr == ' ')
+	{
+		pd.f_flag = ' ';
+		pd.s_flag = ft_check_after_space(*sptr);
+		(*sptr)++;
+		pd.ff_val = 0;
+		if (pd.s_flag != '0')
+			pd.ff_val = ft_uatoi(sptr);
+		pd.sf_val = 0;
+		if (pd.s_flag == '0')
+			pd.sf_val = ft_uatoi(sptr);
+		if (pd.s_flag == '.' || pd.s_flag == '-')
+		{
+			(*sptr)++;
+			pd.sf_val = ft_uatoi(sptr);
+		}
+
+		pd.v_type = ft_isvalidtype(**sptr);
+	}
+	else if (**sptr == '-')
+	{
+		pd.f_flag = '-';
+		pd.s_flag = ft_check_after_minus(*sptr);
+		(*sptr)++;
+		pd.ff_val = 0;
+		pd.sf_val = 0;
+		if(pd.s_flag != '0')
+			pd.ff_val = ft_uatoi(sptr);
+		if (pd.s_flag == '0')
+			pd.sf_val = ft_uatoi(sptr);
+		if (pd.s_flag == '.')
+		{
+			(*sptr)++;
+			pd.sf_val = ft_uatoi(sptr);
+		}
+		pd.v_type = ft_isvalidtype(**sptr);
+	}
+	else if(**sptr == '#')
+	{
+		pd.f_flag = '#';
+		(*sptr)++;
+		pd.ff_val = ft_uatoi(sptr);
+		pd.s_flag = 0;
+		pd.sf_val = 0;
+		pd.v_type = ft_isvalidtype(**sptr);
+	}
+	else if (ft_isvalidtype(**sptr))
+	{
+		pd.f_flag = 0;
+		pd.s_flag = 0;
+		pd.v_type = **sptr;
+	}
+	return (ft_do_print(args, pd));
+	
 }
 
 int	ft_printf(const char *str, ...)
